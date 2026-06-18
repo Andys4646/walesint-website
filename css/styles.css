@@ -44,8 +44,9 @@ body{hanging-punctuation:first allow-end}
 [id]{scroll-margin-top:104px}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
 /* unified, art-directed image grade across the site */
-.hero__media img{filter:saturate(.92) contrast(1.02)}
-.firm__media img{filter:saturate(.9) contrast(1.02) brightness(.99)}
+.hero__media img{filter:saturate(.85) contrast(1.07) brightness(.95)}
+.hero__media::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(176deg,transparent 48%,rgba(10,26,46,.34))}
+.firm__media img{filter:saturate(.88) contrast(1.04) brightness(.98)}
 .board__face,.dest__facts li{-webkit-font-smoothing:antialiased}
 /* faint paper grain for depth (kept very subtle) */
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9000;opacity:.022;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
@@ -165,6 +166,17 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9000;o
 .method__row:hover h3{color:var(--gold-2)}
 .method__row p{grid-area:desc;color:#9fb0c0;font-size:1rem;max-width:620px;margin-top:8px}
 
+/* ===== The Journey (process timeline) ===== */
+.journey{background:var(--paper)}
+.journey__head{max-width:640px;margin-bottom:66px}
+.journey__steps{display:grid;grid-template-columns:repeat(5,1fr);gap:26px;border-top:1px solid var(--line)}
+.jstep{position:relative;padding-top:42px}
+.jstep::before{content:"";position:absolute;top:-6px;left:0;width:11px;height:11px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 5px var(--paper);transition:transform .3s var(--ease),background .3s}
+.jstep:hover::before{transform:scale(1.3);background:var(--red)}
+.jstep__no{font-family:var(--serif);font-style:italic;font-weight:500;font-size:1.25rem;color:var(--gold)}
+.jstep h3{font-size:1.3rem;margin:8px 0 12px;font-weight:500}
+.jstep p{color:var(--muted);font-size:.93rem;line-height:1.6}
+
 /* ===== Destinations ===== */
 .dest{background:var(--paper)}
 .dest__head{max-width:640px;margin-bottom:56px}
@@ -253,7 +265,10 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9000;o
   .firm__inner{grid-template-columns:1fr;gap:54px}
   .firm__media{max-width:520px}
   .dest__grid{grid-template-columns:repeat(2,1fr)}
-  .dest__overlay p{max-height:80px;opacity:1;margin-top:2px}
+  .journey__steps{grid-template-columns:1fr;border-top:0;border-left:1px solid var(--line);gap:0}
+  .jstep{padding:0 0 38px 32px}
+  .jstep:last-child{padding-bottom:0}
+  .jstep::before{top:5px;left:-6px}
   .footer__grid{grid-template-columns:1fr 1fr;gap:38px}
 }
 
