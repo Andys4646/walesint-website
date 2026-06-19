@@ -24,6 +24,7 @@
   closeBtn.addEventListener("click", closeNav);
   backdrop.addEventListener("click", closeNav);
   nav.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeNav));
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeNav(); });
 
   /* ---------- Active nav link ---------- */
   const links = [...document.querySelectorAll('.nav__link[href^="#"]')];

@@ -10,7 +10,7 @@
   --paper:#f3ede1;
   --paper-2:#ebe3d3;
   --ink:#1a1712;
-  --muted:#6f685b;
+  --muted:#615a4c;
   --navy:#16365c;
   --night:#0b1c30;
   --night-2:#081625;
@@ -43,6 +43,8 @@ body{hanging-punctuation:first allow-end}
 /* ---- premium polish ---- */
 [id]{scroll-margin-top:104px}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+.skip-link{position:absolute;left:8px;top:-60px;z-index:100;background:var(--ink);color:#fff;padding:11px 20px;border-radius:0 0 4px 4px;font-family:var(--sans);font-weight:600;font-size:.85rem;transition:top .2s var(--ease)}
+.skip-link:focus{top:0}
 /* unified, art-directed image grade across the site */
 .hero__media img{filter:saturate(.85) contrast(1.07) brightness(.95)}
 .hero__media::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(176deg,transparent 48%,rgba(10,26,46,.34))}
@@ -240,7 +242,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9000;o
 .footer__col a{color:#8b99a8;transition:color .2s}.footer__col a:hover{color:var(--gold-2)}
 .footer__cta p{color:#8b99a8;margin-bottom:20px;font-size:.92rem}
 .footer__bar{border-top:1px solid var(--line-dark)}
-.footer__bar-inner{display:flex;justify-content:space-between;gap:12px;padding:22px 28px;font-size:.8rem;letter-spacing:.05em;color:#6f7d8c;flex-wrap:wrap}
+.footer__bar-inner{display:flex;justify-content:space-between;gap:12px;padding:22px 28px;font-size:.8rem;letter-spacing:.05em;color:#8a97a5;flex-wrap:wrap}
 
 /* ===== WhatsApp float ===== */
 .whatsapp-float{position:fixed;right:22px;bottom:22px;width:56px;height:56px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 12px 28px rgba(37,211,102,.4);z-index:60;transition:transform .25s}
