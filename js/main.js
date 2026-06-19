@@ -79,6 +79,7 @@
   revealEls.forEach((el) => revealObs.observe(el));
 
   /* ---------- Count-up stats ---------- */
+  const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const counters = document.querySelectorAll("[data-count]");
   const countObs = new IntersectionObserver(
     (entries, obs) => entries.forEach((e) => {
@@ -86,6 +87,8 @@
       const el = e.target;
       const target = parseInt(el.getAttribute("data-count"), 10);
       const suffix = el.getAttribute("data-suffix") || "";
+      obs.unobserve(el);
+      if (reduceMotion || isNaN(target)) { el.textContent = (isNaN(target) ? el.textContent : target + suffix); return; }
       const start = performance.now(), dur = 1100;
       const tick = (now) => {
         const p = Math.min((now - start) / dur, 1);
@@ -96,7 +99,6 @@
       requestAnimationFrame(tick);
       // guarantee the final value even if rAF is throttled (background tab etc.)
       setTimeout(function () { el.textContent = target + suffix; }, dur + 300);
-      obs.unobserve(el);
     }),
     { threshold: 0.5 }
   );
