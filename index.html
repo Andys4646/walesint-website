@@ -41,7 +41,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/styles.css?v=8" />
+  <link rel="stylesheet" href="css/styles.css?v=10" />
 </head>
 <body>
   <a href="#home" class="skip-link">Skip to content</a>
@@ -322,16 +322,83 @@
     </div>
   </section>
 
-  <!-- ===== CLOSING CTA ===== -->
-  <section class="cta" id="contact">
-    <div class="container cta__inner">
-      <p class="label label--light">Begin</p>
-      <h2 class="cta__title">Your seat at a world-class<br>university is one<br><em>conversation</em> away.</h2>
-      <div class="cta__actions">
-        <a href="https://wa.me/923006107068" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Message us on WhatsApp</a>
-        <a href="tel:+923006107068" class="btn btn--ghost btn--lg">+92 300 610 7068</a>
+  <!-- ===== FINDER (interactive route explorer) ===== -->
+  <section class="finder section" id="finder">
+    <div class="container">
+      <header class="finder__head">
+        <p class="label">Find Your Route</p>
+        <h2 class="display">Where could you<br>go from here?</h2>
+        <p class="finder__lead">Choose a destination and level to see what's realistic — then we map the rest in your free assessment.</p>
+      </header>
+      <div class="finder__tool">
+        <div class="finder__controls">
+          <div class="finder__field">
+            <span class="finder__label">Destination</span>
+            <div class="seg" id="segDest">
+              <button type="button" data-val="uk" class="is-active">United Kingdom</button>
+              <button type="button" data-val="usa">United States</button>
+              <button type="button" data-val="australia">Australia</button>
+              <button type="button" data-val="canada">Canada</button>
+            </div>
+          </div>
+          <div class="finder__field">
+            <span class="finder__label">Study level</span>
+            <div class="seg" id="segLevel">
+              <button type="button" data-val="bachelors" class="is-active">Bachelor's</button>
+              <button type="button" data-val="masters">Master's</button>
+            </div>
+          </div>
+        </div>
+        <div class="finder__result" id="finderResult" aria-live="polite"><!-- rendered by JS --></div>
       </div>
-      <p class="cta__note">Free first consultation · info@walesint.com · mudassar@walesint.com</p>
+    </div>
+  </section>
+
+  <!-- ===== FREE ASSESSMENT (lead capture) ===== -->
+  <section class="assess" id="contact">
+    <div class="container assess__inner">
+      <div class="assess__intro">
+        <p class="label label--light">Your Free Assessment</p>
+        <h2 class="display display--light">See where you<br>could study —<br>within <em>24 hours</em>.</h2>
+        <p class="assess__lead">Share a few details and a senior counsellor personally reviews your profile, then comes back with the universities, courses and scholarships that genuinely fit. No cost, no obligation.</p>
+        <ul class="assess__points">
+          <li>A shortlist of universities matched to your goals</li>
+          <li>Realistic entry &amp; scholarship options</li>
+          <li>A clear next step — within one working day</li>
+        </ul>
+        <p class="assess__trust"><span aria-hidden="true">✓</span> British Council trained &amp; certified counsellors · Since 2003</p>
+        <div class="assess__alt">
+          <span>Prefer to talk now?</span>
+          <a href="https://wa.me/923006107068" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="tel:+923006107068">+92 300 610 7068</a>
+        </div>
+      </div>
+      <div class="assess__card">
+        <form class="assess__form" id="assessForm" novalidate>
+          <div class="assess__row">
+            <div class="assess__field"><label for="af-name">Full name</label><input id="af-name" name="name" type="text" autocomplete="name" required placeholder="Your name" /></div>
+            <div class="assess__field"><label for="af-phone">Phone / WhatsApp</label><input id="af-phone" name="phone" type="tel" autocomplete="tel" required placeholder="+92 3xx xxxxxxx" /></div>
+          </div>
+          <div class="assess__field"><label for="af-email">Email</label><input id="af-email" name="email" type="email" autocomplete="email" required placeholder="you@email.com" /></div>
+          <div class="assess__row">
+            <div class="assess__field"><label for="af-dest">Preferred destination</label>
+              <select id="af-dest" name="destination"><option>United Kingdom</option><option>United States</option><option>Australia</option><option>Canada</option><option>Not sure yet</option></select>
+            </div>
+            <div class="assess__field"><label for="af-level">Study level</label>
+              <select id="af-level" name="level"><option>Bachelor's</option><option>Master's</option><option>PhD</option><option>Foundation / other</option></select>
+            </div>
+          </div>
+          <div class="assess__field"><label for="af-notes">What would you like to study? <i>(optional)</i></label><textarea id="af-notes" name="notes" rows="2" placeholder="e.g. Computer Science, Business, Law…"></textarea></div>
+          <button type="submit" class="btn btn--primary btn--lg assess__submit">Request my free assessment</button>
+          <p class="assess__fine">No cost · no obligation · your details stay private.</p>
+        </form>
+        <div class="assess__success" id="assessSuccess" hidden>
+          <div class="assess__tick" aria-hidden="true">✓</div>
+          <h3>Thank you — your request is in.</h3>
+          <p>A senior counsellor will review your profile and reach out within one working day. For anything urgent, message us on WhatsApp.</p>
+          <a href="https://wa.me/923006107068" target="_blank" rel="noopener" class="btn btn--primary">Message us on WhatsApp</a>
+        </div>
+      </div>
     </div>
   </section>
   </main>
@@ -385,6 +452,6 @@
     <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.4.7 4.7 1.9 6.7L3 29l7-1.8c1.9 1 4 1.6 6.1 1.6 6.9 0 12.5-5.6 12.5-12.5S22.9 3 16 3Zm0 22.8c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.1 1.1 1.1-4-.2-.4a10.2 10.2 0 0 1-1.6-5.4c0-5.7 4.7-10.3 10.4-10.3 5.7 0 10.3 4.6 10.3 10.3 0 5.7-4.6 10.4-10.2 10.4Zm5.7-7.7c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.5-1.6-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2.1-.4 0-.6l-1-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.4 5.3 4.7.7.3 1.3.5 1.8.7.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.2-.6-.4Z"/></svg>
   </a>
 
-  <script src="js/main.js?v=6"></script>
+  <script src="js/main.js?v=10"></script>
 </body>
 </html>

@@ -68,7 +68,7 @@
 
   /* ---------- Reveal on scroll ---------- */
   const revealEls = document.querySelectorAll(
-    ".manifesto__text, .firm__media, .firm__body, .method__head, .method__row, .dest__head, .dest__card, .outcomes__head, .board__row, .stat, .cta__inner"
+    ".manifesto__text, .firm__media, .firm__body, .method__head, .method__row, .dest__head, .dest__card, .outcomes__head, .board__row, .stat, .finder__head, .finder__tool, .assess__intro, .assess__card"
   );
   revealEls.forEach((el) => el.classList.add("reveal"));
   const revealObs = new IntersectionObserver(
@@ -104,4 +104,93 @@
     { threshold: 0.5 }
   );
   counters.forEach((c) => countObs.observe(c));
+
+  /* ---------- Finder (route explorer) ---------- */
+  const finderData = {
+    uk: { name: "United Kingdom",
+      bachelors: { duration: "3 years", intake: "Sept · some Jan", tuition: "£14k–£26k / yr", work: "Graduate Route: 2 yrs", note: "Apply via UCAS — your personal statement carries real weight, and Russell Group options are on the table." },
+      masters: { duration: "1 year", intake: "Sept · some Jan", tuition: "£15k–£30k / yr", work: "Graduate Route: 2 yrs", note: "A one-year master's saves time and money — the UK's biggest advantage over other destinations." } },
+    usa: { name: "United States",
+      bachelors: { duration: "4 years", intake: "Fall · some Spring", tuition: "$25k–$55k / yr", work: "OPT: 1 yr (3 for STEM)", note: "Admissions tests are often optional now — essays, profile and activities matter most. Deep scholarship pool." },
+      masters: { duration: "1.5–2 years", intake: "Fall · Spring", tuition: "$20k–$50k / yr", work: "OPT: 1 yr (3 for STEM)", note: "The GRE is increasingly optional; assistantships and merit aid can cut costs substantially." } },
+    australia: { name: "Australia",
+      bachelors: { duration: "3 years", intake: "Feb · Jul", tuition: "A$28k–45k / yr", work: "Post-study: 2–4 yrs", note: "Group of Eight universities, generous post-study work, and clear pathways to stay on." },
+      masters: { duration: "1.5–2 years", intake: "Feb · Jul", tuition: "A$30k–48k / yr", work: "Post-study: 2–4 yrs", note: "Strong post-study rights and regional incentives make Australia a long-game favourite." } },
+    canada: { name: "Canada",
+      bachelors: { duration: "4 years", intake: "Sept · some Jan/May", tuition: "C$20k–38k / yr", work: "PGWP: up to 3 yrs", note: "Affordable tuition and one of the clearest routes to permanent residency." },
+      masters: { duration: "1–2 years", intake: "Sept · some Jan", tuition: "C$18k–35k / yr", work: "PGWP: up to 3 yrs", note: "Co-op options and a direct PR pathway via Express Entry." } },
+  };
+  let fdDest = "uk", fdLevel = "bachelors";
+  const finderResult = document.getElementById("finderResult");
+
+  function renderFinder() {
+    const d = finderData[fdDest][fdLevel];
+    const cname = finderData[fdDest].name;
+    const levelLabel = fdLevel === "bachelors" ? "Bachelor's" : "Master's";
+    finderResult.innerHTML =
+      '<div class="fr__top"><h3>' + cname + ' — ' + levelLabel + '</h3><span class="fr__sub">Indicative guidance</span></div>' +
+      '<div class="fr__grid">' +
+        '<div class="fr__cell"><div class="k">Duration</div><div class="v">' + d.duration + '</div></div>' +
+        '<div class="fr__cell"><div class="k">Intake</div><div class="v">' + d.intake + '</div></div>' +
+        '<div class="fr__cell"><div class="k">Tuition (indicative)</div><div class="v">' + d.tuition + '</div></div>' +
+        '<div class="fr__cell"><div class="k">Post-study work</div><div class="v">' + d.work + '</div></div>' +
+      '</div>' +
+      '<p class="fr__note"><span></span>' + d.note + '</p>' +
+      '<a href="#contact" class="btn btn--primary fr__cta" data-dest="' + cname + '" data-level="' + levelLabel + '">Get a free assessment for ' + cname + ' &rarr;</a>';
+  }
+  function bindSeg(id, setter) {
+    const seg = document.getElementById(id);
+    if (!seg) return;
+    seg.addEventListener("click", (e) => {
+      const b = e.target.closest("button");
+      if (!b) return;
+      [...seg.children].forEach((c) => c.classList.remove("is-active"));
+      b.classList.add("is-active");
+      setter(b.dataset.val);
+      renderFinder();
+    });
+  }
+  if (finderResult) {
+    bindSeg("segDest", (v) => (fdDest = v));
+    bindSeg("segLevel", (v) => (fdLevel = v));
+    renderFinder();
+    // Finder CTA pre-fills the assessment form
+    finderResult.addEventListener("click", (e) => {
+      const cta = e.target.closest(".fr__cta");
+      if (!cta) return;
+      const destSel = document.getElementById("af-dest");
+      const lvlSel = document.getElementById("af-level");
+      if (destSel) { [...destSel.options].forEach((o) => { if (o.value === cta.dataset.dest) destSel.value = o.value; }); }
+      if (lvlSel) { [...lvlSel.options].forEach((o) => { if (o.value === cta.dataset.level) lvlSel.value = o.value; }); }
+    });
+  }
+
+  /* ---------- Assessment form ---------- */
+  const aForm = document.getElementById("assessForm");
+  if (aForm) {
+    aForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const checks = [
+        ["af-name", (v) => v.trim().length > 1],
+        ["af-phone", (v) => v.replace(/\D/g, "").length >= 7],
+        ["af-email", (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())],
+      ];
+      let ok = true;
+      checks.forEach(([id, test]) => {
+        const el = document.getElementById(id);
+        if (!test(el.value)) { el.classList.add("invalid"); ok = false; }
+        else { el.classList.remove("invalid"); }
+      });
+      if (!ok) { const bad = aForm.querySelector(".invalid"); if (bad) bad.focus(); return; }
+      // TODO (go-live): wire to a real endpoint — e.g. Formspree:
+      //   fetch("https://formspree.io/f/REPLACE_ID", { method:"POST", body:new FormData(aForm), headers:{Accept:"application/json"} });
+      aForm.hidden = true;
+      const ok2 = document.getElementById("assessSuccess");
+      ok2.hidden = false;
+      ok2.scrollIntoView({ block: "center", behavior: "smooth" });
+    });
+    aForm.addEventListener("input", (e) => {
+      if (e.target.classList.contains("invalid") && e.target.value.trim()) e.target.classList.remove("invalid");
+    });
+  }
 })();
