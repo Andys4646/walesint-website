@@ -182,12 +182,28 @@
         else { el.classList.remove("invalid"); }
       });
       if (!ok) { const bad = aForm.querySelector(".invalid"); if (bad) bad.focus(); return; }
-      // TODO (go-live): wire to a real endpoint — e.g. Formspree:
-      //   fetch("https://formspree.io/f/REPLACE_ID", { method:"POST", body:new FormData(aForm), headers:{Accept:"application/json"} });
-      aForm.hidden = true;
-      const ok2 = document.getElementById("assessSuccess");
-      ok2.hidden = false;
-      ok2.scrollIntoView({ block: "center", behavior: "smooth" });
+      const errEl = document.getElementById("assessError");
+      if (errEl) errEl.hidden = true;
+      const btn = aForm.querySelector(".assess__submit");
+      const label = btn ? btn.textContent : "";
+      if (btn) { btn.disabled = true; btn.textContent = "Sending…"; }
+      fetch(aForm.getAttribute("action") || "lead-submit.php", {
+        method: "POST",
+        body: new FormData(aForm),
+        headers: { Accept: "application/json" },
+      })
+        .then((r) => r.json().catch(() => ({ ok: r.ok })))
+        .then((data) => {
+          if (!data || !data.ok) throw new Error("save failed");
+          aForm.hidden = true;
+          const done = document.getElementById("assessSuccess");
+          done.hidden = false;
+          done.scrollIntoView({ block: "center", behavior: "smooth" });
+        })
+        .catch(() => {
+          if (btn) { btn.disabled = false; btn.textContent = label; }
+          if (errEl) errEl.hidden = false;
+        });
     });
     aForm.addEventListener("input", (e) => {
       if (e.target.classList.contains("invalid") && e.target.value.trim()) e.target.classList.remove("invalid");

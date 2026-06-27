@@ -379,3 +379,13 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9000;o
   .footer__grid{grid-template-columns:1fr}
   .hero__title{font-size:clamp(2.2rem,10vw,3.3rem)}
 }
+
+/* Honeypot (anti-bot) — visually hidden, off-screen */
+.hp{position:absolute!important;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+/* Assessment form error (shown only if the save fails) */
+.assess__error{margin-top:8px;text-align:center;font-size:.82rem;color:#ffd9d6;background:rgba(192,50,44,.18);border:1px solid rgba(192,50,44,.5);padding:9px 12px;border-radius:9px}
+.assess__error a{color:#fff;text-decoration:underline}
+/* Discreet staff/admin link in the footer bar */
+.footer__meta{display:inline-flex;gap:6px;align-items:center}
+.footer__admin{color:inherit;text-decoration:none;opacity:.55;transition:opacity .15s,color .15s}
+.footer__admin:hover{opacity:1;color:var(--gold)}
