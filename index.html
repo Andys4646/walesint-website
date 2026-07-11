@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wales International — Study at the World's Best Universities | British Council Certified Study-Abroad Consultancy, Lahore</title>
-  <meta name="description" content="Wales International is a British Council certified study-abroad consultancy in Lahore — for over twenty years, placing ambitious students at the world's leading universities. Admissions, scholarships and visas, mastered. Since 2003." />
+  <title>Study Abroad Consultants in Lahore — Wales International</title>
+  <meta name="description" content="Study-abroad consultants in Lahore since 2003, British Council certified. Admissions, scholarships and visas for the UK, USA, Australia and Canada. Free assessment." />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
   <link rel="canonical" href="https://walesint.com/" />
   <meta name="theme-color" content="#0b1c30" />
   <link rel="icon" type="image/png" href="assets/img/logo.png" />
+  <link rel="preload" as="image" href="assets/img/hero-grad.jpg" fetchpriority="high" />
 
   <!-- Social share cards (Open Graph + Twitter) -->
   <meta property="og:type" content="website" />
@@ -15,24 +17,57 @@
   <meta property="og:title" content="Wales International — Study at the World's Best Universities" />
   <meta property="og:description" content="We move ambitious students from application to acceptance at the leading universities of the UK, USA, Australia & Canada. British Council certified, since 2003." />
   <meta property="og:image" content="https://walesint.com/assets/img/celebrate.jpg" />
+  <meta property="og:image:alt" content="Wales International — students celebrating their university admissions" />
+  <meta property="og:image:width" content="1600" />
+  <meta property="og:image:height" content="1067" />
   <meta property="og:url" content="https://walesint.com/" />
+  <meta property="og:locale" content="en_PK" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Wales International — Study at the World's Best Universities" />
   <meta name="twitter:description" content="Study-abroad consultants since 2003. UK · USA · Australia · Canada — admissions, scholarships & visas, handled end to end." />
   <meta name="twitter:image" content="https://walesint.com/assets/img/celebrate.jpg" />
 
+  <!-- TODO (fill once confirmed with the client, then add): PostalAddress.streetAddress + postalCode, geo lat/lng, openingHoursSpecification (HH:MM), sameAs [Facebook, Instagram, Google Business Profile], and hasCredential for the EXACT British Council programme/tier. Do NOT add self-serving Review/AggregateRating — stars come from the Google Business Profile. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
-    "name": "Wales International",
-    "description": "British Council certified study-abroad education consultancy placing students at leading universities in the UK, USA, Australia and Canada since 2003.",
-    "url": "https://walesint.com",
-    "foundingDate": "2003",
-    "email": "info@walesint.com",
-    "telephone": "+92-300-610-7068",
-    "slogan": "Aiding Your Aims",
-    "areaServed": ["United Kingdom", "United States", "Australia", "Canada"]
+    "@graph": [
+      {
+        "@type": ["ProfessionalService", "Organization"],
+        "@id": "https://walesint.com/#organization",
+        "name": "Wales International",
+        "url": "https://walesint.com/",
+        "logo": { "@type": "ImageObject", "@id": "https://walesint.com/#logo", "url": "https://walesint.com/assets/img/logo.png", "contentUrl": "https://walesint.com/assets/img/logo.png", "caption": "Wales International" },
+        "image": { "@type": "ImageObject", "@id": "https://walesint.com/#primaryimage", "url": "https://walesint.com/assets/img/celebrate.jpg", "width": 1600, "height": 1067 },
+        "description": "British Council certified study-abroad consultancy in Lahore, Pakistan. Since 2003, Wales International secures admissions, scholarships and student visas at leading universities in the UK, USA, Australia and Canada.",
+        "slogan": "Aiding Your Aims",
+        "foundingDate": "2003",
+        "email": "info@walesint.com",
+        "telephone": "+92-300-610-7068",
+        "currenciesAccepted": "PKR",
+        "address": { "@type": "PostalAddress", "addressLocality": "Lahore", "addressRegion": "Punjab", "addressCountry": "PK" },
+        "areaServed": [ { "@type": "City", "name": "Lahore" }, { "@type": "State", "name": "Punjab" }, { "@type": "Country", "name": "Pakistan" } ],
+        "knowsLanguage": ["en", "ur"],
+        "knowsAbout": ["Study abroad", "University admissions", "UCAS applications", "Student visas", "University scholarships", "IELTS preparation", "UK universities", "USA universities", "Australia universities", "Canada universities"],
+        "contactPoint": [
+          { "@type": "ContactPoint", "telephone": "+92-300-610-7068", "contactType": "customer service", "availableLanguage": ["English", "Urdu"], "areaServed": "PK" },
+          { "@type": "ContactPoint", "telephone": "+92-300-613-9274", "contactType": "sales", "availableLanguage": ["English", "Urdu"], "areaServed": "PK" }
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Study-abroad services",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "University Admissions", "serviceType": "University admissions consulting", "provider": { "@id": "https://walesint.com/#organization" } } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Scholarships & Funding", "serviceType": "Scholarship advising", "provider": { "@id": "https://walesint.com/#organization" } } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Student Visa Guidance", "serviceType": "Student visa consulting", "provider": { "@id": "https://walesint.com/#organization" } } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Test Preparation", "serviceType": "IELTS and entrance exam preparation", "provider": { "@id": "https://walesint.com/#organization" } } },
+            { "@type": "Offer", "price": "0", "priceCurrency": "PKR", "itemOffered": { "@type": "Service", "name": "Free Profile Assessment", "serviceType": "Study-abroad profile assessment", "provider": { "@id": "https://walesint.com/#organization" } } }
+          ]
+        }
+      },
+      { "@type": "WebSite", "@id": "https://walesint.com/#website", "url": "https://walesint.com/", "name": "Wales International", "inLanguage": "en", "publisher": { "@id": "https://walesint.com/#organization" } },
+      { "@type": "WebPage", "@id": "https://walesint.com/#webpage", "url": "https://walesint.com/", "name": "Study Abroad Consultants in Lahore — Wales International", "isPartOf": { "@id": "https://walesint.com/#website" }, "about": { "@id": "https://walesint.com/#organization" }, "primaryImageOfPage": { "@id": "https://walesint.com/#primaryimage" }, "inLanguage": "en" }
+    ]
   }
   </script>
 
@@ -83,7 +118,7 @@
   <!-- ===== HERO / COVER ===== -->
   <section class="hero" id="home">
     <div class="hero__media" aria-hidden="true">
-      <img src="assets/img/hero-grad.jpg" alt="" />
+      <img src="assets/img/hero-grad.jpg" alt="" width="1600" height="2400" fetchpriority="high" decoding="async" />
       <span class="hero__seal">Est.<br><b>2003</b></span>
     </div>
     <div class="container hero__inner">
@@ -442,7 +477,7 @@
     <div class="footer__bar">
       <div class="container footer__bar-inner">
         <span>© 2026 Wales International — All Rights Reserved.</span>
-        <span class="footer__meta">Aiding Your Aims <a class="footer__admin" href="lead-admin.php" title="Staff login">· Admin</a></span>
+        <span class="footer__meta">Aiding Your Aims <a class="footer__admin" href="lead-admin.php" title="Staff login" rel="nofollow">· Admin</a></span>
       </div>
     </div>
   </footer>
@@ -451,6 +486,6 @@
     <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.4.7 4.7 1.9 6.7L3 29l7-1.8c1.9 1 4 1.6 6.1 1.6 6.9 0 12.5-5.6 12.5-12.5S22.9 3 16 3Zm0 22.8c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.1 1.1 1.1-4-.2-.4a10.2 10.2 0 0 1-1.6-5.4c0-5.7 4.7-10.3 10.4-10.3 5.7 0 10.3 4.6 10.3 10.3 0 5.7-4.6 10.4-10.2 10.4Zm5.7-7.7c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.5-1.6-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2.1-.4 0-.6l-1-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.4 5.3 4.7.7.3 1.3.5 1.8.7.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.2-.6-.4Z"/></svg>
   </a>
 
-  <script src="js/main.js?v=11"></script>
+  <script src="js/main.js?v=11" defer></script>
 </body>
 </html>

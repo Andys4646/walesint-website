@@ -1,0 +1,5 @@
+# https://walesint.com/robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://walesint.com/sitemap.xml
