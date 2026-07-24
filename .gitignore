@@ -17,6 +17,7 @@ node_modules/
 # Server-side backend (deployed to the VPS only — keep admin logic out of the public repo)
 lead-submit.php
 lead-admin.php
+admin-analytics.php
 
 # SEO strategy doc — keep private
 SEO-FRAMEWORK.md

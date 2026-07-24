@@ -4,6 +4,27 @@
 (function () {
   "use strict";
 
+  /* ---------- GA4 events (no-op until the gtag snippet is installed) ---------- */
+  function track(name, params) {
+    if (typeof window.gtag === "function") window.gtag("event", name, params || {});
+  }
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a");
+    if (!a) return;
+    const href = a.getAttribute("href") || "";
+    if (href.indexOf("wa.me") !== -1) {
+      track("whatsapp_click", { location: a.className || a.closest("section,footer,header")?.id || "" });
+    } else if (href.indexOf("tel:") === 0) {
+      track("phone_click", { phone_number: href.slice(4) });
+    } else if (href.indexOf("mailto:") === 0) {
+      track("email_click", { email: href.slice(7) });
+    } else if (a.classList.contains("fr__cta")) {
+      track("find_route_cta", { destination: a.dataset.dest || "", level: a.dataset.level || "" });
+    } else if (a.classList.contains("nav__cta") || a.classList.contains("btn--primary")) {
+      track("cta_click", { text: (a.textContent || "").trim().slice(0, 60) });
+    }
+  }, { passive: true });
+
   /* ---------- Sticky header ---------- */
   const header = document.querySelector(".header");
   const onScroll = () => header.classList.toggle("is-stuck", window.scrollY > 8);
@@ -199,6 +220,11 @@
           const done = document.getElementById("assessSuccess");
           done.hidden = false;
           done.scrollIntoView({ block: "center", behavior: "smooth" });
+          // GA4: count the lead only after the server confirms the save
+          track("generate_lead", {
+            destination: (document.getElementById("af-dest") || {}).value || "",
+            level: (document.getElementById("af-level") || {}).value || "",
+          });
         })
         .catch(() => {
           if (btn) { btn.disabled = false; btn.textContent = label; }
